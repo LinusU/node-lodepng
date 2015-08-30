@@ -1,6 +1,13 @@
 {
   "name": "lodepng",
   "version": "0.1.0",
+  "license": "Zlib",
+  "author": "Linus Unnebäck <linus@folkdatorn.se>",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/LinusU/node-lodepng.git"
+  },
   "dependencies": {
     "nan": "^2.0.8"
   },
