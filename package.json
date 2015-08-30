@@ -1,6 +1,6 @@
 {
   "name": "lodepng",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "dependencies": {
     "nan": "^2.0.8"
   },
