@@ -12,8 +12,15 @@ public:
 
     v8::Local<v8::Value> data = Nan::Get(src, Nan::New("data").ToLocalChecked()).ToLocalChecked();
 
-    input = (unsigned char*) node::Buffer::Data(data);
-    inputLength = node::Buffer::Length(data);
+    Nan::TypedArrayContents<unsigned char> typedData(data);
+
+    if (typedData.length() > 0) {
+      input = *typedData;
+      inputLength = typedData.length();
+    } else {
+      input = (unsigned char*) node::Buffer::Data(data);
+      inputLength = node::Buffer::Length(data);
+    }
   }
 
   void Execute () {

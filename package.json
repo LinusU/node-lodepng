@@ -9,7 +9,7 @@
     "url": "http://github.com/LinusU/node-lodepng.git"
   },
   "dependencies": {
-    "nan": "^2.0.8"
+    "nan": "^2.1.0"
   },
   "devDependencies": {
     "image-size": "^0.3.5",
