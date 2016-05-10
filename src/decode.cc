@@ -7,6 +7,8 @@
 class DecodeWorker : public Nan::AsyncWorker {
 public:
   DecodeWorker (v8::Local<v8::Value> data, Nan::Callback* cb) : Nan::AsyncWorker(cb) {
+    SaveToPersistent("data", data);
+
     raw = (unsigned char*) node::Buffer::Data(data);
     len = node::Buffer::Length(data);
   }
