@@ -11,8 +11,12 @@
     "nan": "^2.6.2"
   },
   "devDependencies": {
+    "assert-rejects": "^0.1.1",
     "image-size": "^0.6.1",
     "mocha": "^3.5.0",
     "standard": "^10.0.3"
+  },
+  "engines": {
+    "node": ">=4"
   }
 }
