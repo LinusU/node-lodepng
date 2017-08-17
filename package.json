@@ -9,12 +9,12 @@
     "url": "http://github.com/LinusU/node-lodepng.git"
   },
   "dependencies": {
-    "nan": "^2.1.0"
+    "nan": "^2.6.2"
   },
   "devDependencies": {
-    "image-size": "^0.3.5",
-    "mocha": "^2.2.5",
-    "standard": "^5.1.1"
+    "image-size": "^0.6.1",
+    "mocha": "^3.5.0",
+    "standard": "^10.0.3"
   },
   "scripts": {
     "test": "standard && mocha"
