@@ -1,10 +1,16 @@
 ///<reference types="node"/>
 
-interface Source {
+interface ImageLike {
   width: number
   height: number
   data: Buffer | ArrayBufferView
 }
 
-export function encode (source: Source): Promise<Buffer>
-export function decode (source: Buffer): Promise<Source>
+interface Image {
+  width: number
+  height: number
+  data: Buffer
+}
+
+export function encode (source: ImageLike): Promise<Buffer>
+export function decode (source: Buffer): Promise<Image>
