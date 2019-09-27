@@ -16,11 +16,11 @@ describe('Decode', () => {
     const data = fs.readFileSync(path.join(__dirname, 'basn3p01.png'))
 
     return png.decode(data).then((img) => {
-      assert.equal(img.width, 32)
-      assert.equal(img.height, 32)
+      assert.strictEqual(img.width, 32)
+      assert.strictEqual(img.height, 32)
 
-      assert.equal(getPixel(img, 18, 10), 0xff22ffee)
-      assert.equal(getPixel(img, 14, 26), 0xffff6622)
+      assert.strictEqual(getPixel(img, 18, 10), 0xff22ffee)
+      assert.strictEqual(getPixel(img, 14, 26), 0xffff6622)
     })
   })
 })

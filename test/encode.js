@@ -18,11 +18,11 @@ function testEncode (src) {
   return png.encode(img).then((data) => {
     const size = sizeOf(data)
 
-    assert.equal(size.width, img.width)
-    assert.equal(size.height, img.height)
+    assert.strictEqual(size.width, img.width)
+    assert.strictEqual(size.height, img.height)
 
-    assert.equal(data.readUInt32LE(0), 0x474e5089)
-    assert.equal(data.readUInt32LE(4), 0x0a1a0a0d)
+    assert.strictEqual(data.readUInt32LE(0), 0x474e5089)
+    assert.strictEqual(data.readUInt32LE(4), 0x0a1a0a0d)
   })
 }
 

@@ -7,8 +7,10 @@
 class EncodeWorker : public Nan::AsyncWorker {
 public:
   EncodeWorker (v8::Local<v8::Object> src, Nan::Callback* cb) : Nan::AsyncWorker(cb) {
-    width = (unsigned) Nan::Get(src, Nan::New("width").ToLocalChecked()).ToLocalChecked()->Uint32Value();
-    height = (unsigned) Nan::Get(src, Nan::New("height").ToLocalChecked()).ToLocalChecked()->Uint32Value();
+    v8::Local<v8::Context> context = v8::Isolate::GetCurrent()->GetCurrentContext();
+
+    width = (unsigned) Nan::Get(src, Nan::New("width").ToLocalChecked()).ToLocalChecked()->Uint32Value(context).FromJust();
+    height = (unsigned) Nan::Get(src, Nan::New("height").ToLocalChecked()).ToLocalChecked()->Uint32Value(context).FromJust();
 
     v8::Local<v8::Value> data = Nan::Get(src, Nan::New("data").ToLocalChecked()).ToLocalChecked();
 
@@ -52,5 +54,5 @@ private:
 
 NAN_METHOD(encode) {
   Nan::Callback *cb = new Nan::Callback(info[1].As<v8::Function>());
-  Nan::AsyncQueueWorker(new EncodeWorker(info[0]->ToObject(), cb));
+  Nan::AsyncQueueWorker(new EncodeWorker(info[0].As<v8::Object>(), cb));
 }
