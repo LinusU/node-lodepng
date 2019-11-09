@@ -1,16 +1,12 @@
 ///<reference types="node"/>
 
+import ImageData = require('@canvas/image-data')
+
 interface ImageLike {
   width: number
   height: number
-  data: Buffer | ArrayBufferView
-}
-
-interface Image {
-  width: number
-  height: number
-  data: Buffer
+  data: ArrayBuffer | Buffer | Int8Array | Uint8Array | Uint8ClampedArray
 }
 
 export function encode (source: ImageLike): Promise<Buffer>
-export function decode (source: Buffer): Promise<Image>
+export function decode (source: Buffer): Promise<ImageData>

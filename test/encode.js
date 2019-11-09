@@ -66,22 +66,33 @@ describe('Encode', function () {
     return testEncode(src)
   })
 
-  it('should encode from a Uint16Array', () => {
-    const src = new Uint16Array(4)
+  it('should encode from a Int8Array', () => {
+    const src = new Int8Array(8)
 
-    src[0] = 0xff22
-    src[1] = 0xffee
-    src[2] = 0xffff
-    src[3] = 0x6622
+    src[0] = 0xff
+    src[1] = 0x22
+    src[2] = 0xff
+    src[3] = 0xee
+    src[4] = 0xff
+    src[5] = 0xff
+    src[6] = 0x66
+    src[7] = 0x22
 
     return testEncode(src)
   })
 
-  it('should encode from a Uint32Array', () => {
-    const src = new Uint32Array(2)
+  it('should encode from a ArrayBuffer', () => {
+    const src = new ArrayBuffer(8)
+    const view = new Uint8Array(src)
 
-    src[0] = 0xff22ffee
-    src[1] = 0xffff6622
+    view[0] = 0xff
+    view[1] = 0x22
+    view[2] = 0xff
+    view[3] = 0xee
+    view[4] = 0xff
+    view[5] = 0xff
+    view[6] = 0x66
+    view[7] = 0x22
 
     return testEncode(src)
   })

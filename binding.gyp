@@ -3,13 +3,13 @@
     {
       "target_name": "lodepng",
       "sources": [
-        "vendor/lodepng.cpp",
-        "src/decode.cc",
-        "src/encode.cc",
-        "src/module.cc"
+        "vendor/lodepng.c",
+        "src/decode.c",
+        "src/encode.c",
+        "src/error.c",
+        "src/module.c"
       ],
       "include_dirs": [
-        "<!(node -e \"require('nan')\")",
         "vendor"
       ]
     }
