@@ -9,6 +9,7 @@ typedef struct {
   unsigned char* input;
   size_t inputLength;
 
+  napi_ref reference;
   napi_deferred deferred;
 
   unsigned char* output;
@@ -29,6 +30,8 @@ void decode_free(napi_env env, void* finalize_data, void* finalize_hint) {
 
 void decode_complete(napi_env env, napi_status status, void* _data) {
   DecodeData* data = _data;
+
+  assert(napi_delete_reference(env, data->reference) == napi_ok);
 
   if (data->error) {
     napi_value error;
@@ -65,6 +68,7 @@ napi_value decode(napi_env env, napi_callback_info info) {
   DecodeData* data = malloc(sizeof(DecodeData));
 
   assert(napi_get_typedarray_info(env, args[0], NULL, &data->inputLength, (void **) &data->input, NULL, NULL) == napi_ok);
+  assert(napi_create_reference(env, args[0], 1, &data->reference) == napi_ok);
 
   napi_value promise;
   assert(napi_create_promise(env, &data->deferred, &promise) == napi_ok);

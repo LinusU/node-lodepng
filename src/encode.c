@@ -10,6 +10,7 @@ typedef struct {
   unsigned char* input;
   unsigned width, height;
 
+  napi_ref reference;
   napi_deferred deferred;
 
   size_t outputLength;
@@ -30,6 +31,8 @@ void encode_free(napi_env env, void* finalize_data, void* finalize_hint) {
 
 void encode_complete(napi_env env, napi_status status, void* _data) {
   EncodeData* data = _data;
+
+  assert(napi_delete_reference(env, data->reference) == napi_ok);
 
   if (data->inputLength != data->width * data->height * 4) {
     napi_value error;
@@ -59,6 +62,7 @@ napi_value encode(napi_env env, napi_callback_info info) {
 
   EncodeData* data = malloc(sizeof(EncodeData));
   assert(napi_get_typedarray_info(env, args[0], NULL, &data->inputLength, (void **) &data->input, NULL, NULL) == napi_ok);
+  assert(napi_create_reference(env, args[0], 1, &data->reference) == napi_ok);
   assert(napi_get_value_uint32(env, args[1], &data->width) == napi_ok);
   assert(napi_get_value_uint32(env, args[2], &data->height) == napi_ok);
 
