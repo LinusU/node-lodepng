@@ -1,15 +1,19 @@
-'use strict'
-
 const api = require('./build/Release/lodepng.node')
+const ImageData = require('@canvas/image-data')
 
-exports.encode = function (source) {
-  return new Promise((resolve, reject) => {
-    api.encode(source, (err, result) => (err ? reject(err) : resolve(result)))
-  })
+function toByteArray (input) {
+  if (input instanceof ArrayBuffer) return new Uint8Array(input)
+  if (input instanceof Int8Array) return input
+  if (input instanceof Uint8Array) return input
+  if (input instanceof Uint8ClampedArray) return input
+
+  throw new TypeError('Expected "source.data" to be an ArrayBuffer or Uint8Array')
 }
 
-exports.decode = function (source) {
-  return new Promise((resolve, reject) => {
-    api.decode(source, (err, result) => (err ? reject(err) : resolve(result)))
-  })
+exports.encode = function encode (source) {
+  return api.encode(toByteArray(source.data), source.width, source.height)
+}
+
+exports.decode = function decode (source) {
+  return api.decode(source).then((result) => new ImageData(new Uint8ClampedArray(result.data), result.width, result.height))
 }
